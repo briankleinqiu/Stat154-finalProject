@@ -1,4 +1,4 @@
-# Stat154-finalProject
+#STAT FINAL PROJECT
 Stat 154 Final Project: Brian, Duo, Maura
 
-/TESTING/
+Machine Learning Final Project. Goal is to classify tweets as having positive or negative sentiments
