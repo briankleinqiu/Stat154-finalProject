@@ -10,7 +10,7 @@ X = as.matrix(X) #X is the training matrix of 50,000 tweets and the columns are 
 Xtest = as.matrix(Xtest) #Xtest is the testing matrix
 
 #Create holdout set of 5% and training set of 95%
-set.seed(4152503287)
+set.seed(415250328)
 holdout_indices = sample(1:50000, 2500, replace = FALSE )
 temp = rep(TRUE, 50000)
 temp[holdout_indices] = FALSE
