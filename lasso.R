@@ -42,6 +42,16 @@ yhat[yhat >= .5] = 1
 yhat[yhat < .5] = 0
 sum(yhat == y_holdout)/length(yhat)
 
+#sparse logistic
+y_train = as.factor(y_train)
+y_holdout = as.factor(y_holdout)
+sparse_log = cv.glmnet(X_train, y_train, nfolds = 10, family = "binomial", type.measure = "class")
+yhat = predict(sparse_log, newx = X_holdout, s = "lambda.min", type = "class")
+sum(yhat == y_holdout)/length(yhat)
 
+#find sparse indices
+sparse_indices = which(coef(sparse_log, s = "lambda.1se") != 0)
+sparse_indices = as.character(sparse_indices)
+write(sparse_indices, "sparse_indices.txt", sep="\n")
 
 
