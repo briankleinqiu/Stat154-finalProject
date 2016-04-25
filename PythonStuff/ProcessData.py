@@ -3,9 +3,9 @@ import numpy as np
 import scipy.sparse
 
 vocab_size = 5000
-data_path = "./MaskedDataRaw.csv"
-vocab_path = "./pyVocab.pkl"
-save_path = "./pyMatrix.npz"
+data_path = "./Data/MaskedDataRaw.csv"
+vocab_path = "./Data/pyVocab.pkl"
+save_path = "./Data/pyMatrix.npz"
 
 emoticons_str = r"""
     (?:
