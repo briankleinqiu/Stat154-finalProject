@@ -9,6 +9,7 @@ X_train = np.load("Data/X_train.npy")[()]
 X_holdout = np.load("Data/X_holdout.npy")[()]
 y_train = np.load("Data/y_train.npy")[()]
 y_holdout = np.load("Data/y_holdout.npy")[()]
+X_test = np.load("Data/X_test.npy")
 
 logit = sklearn.linear_model.LogisticRegression(penalty = 'l1')
 logit.fit(X_train, y_train)
@@ -21,7 +22,7 @@ print(accuracy)
 for creating submission only
 t = logit.predict(X_test)
 id = np.arange(50000) + 1
-result =  np.column_stack((id, yhat.astype(int)))
+result =  np.column_stack((id, t.astype(int)))
 with open("logistic_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
             np.savetxt(f, result, fmt='%i', delimiter=",")
