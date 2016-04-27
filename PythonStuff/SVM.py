@@ -2,6 +2,7 @@ from __future__ import division
 import numpy as np
 from sklearn import svm
 from sklearn import cross_validation
+from sklearn import feature_selection
 
 """l1 penalty seems to be faster and predict slightly better so possible to cross validate with that"""
 
@@ -11,8 +12,6 @@ X_holdout = np.load("Data/X_holdout.npy")[()]
 y_train = np.load("Data/y_train.npy")[()]
 y_holdout = np.load("Data/y_holdout.npy")[()]
 X_test = np.load("Data/X_test.npy")[()]
-
-pca_X_train = 
 
 linear = svm.LinearSVC(penalty = 'l1', dual = False, C = 1)
 linear.fit(X_train, y_train)
@@ -38,6 +37,14 @@ with open("holdout_linearsvm_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
         np.savetxt(f, result, fmt='%i', delimiter=",")
 
+#create sparse dataset
+indices = feature_selection.SelectFromModel(linear, prefit = True)
+sparse_X_train = indices.transform(X_train)
+sparse_X_test = indices.transform(X_test)
+
+print("X_train, X_test indices")
+np.save("Data/sparse_X_train", sparse_X_train)
+np.save("Data/sparse_X_test", sparse_X_test)
 
 """
 print("Cross Validation")
