@@ -54,3 +54,10 @@ with open("naivebayes_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
         np.savetxt(f, result, fmt='%i', delimiter=",")
 
+#create holdout predictions
+id = np.arange(25477) + 1
+result =  np.column_stack((id, y_multi.astype(int)))
+with open("holdout_naivebayes_submission.csv", "wb") as f:
+        f.write(b'Id,y\n')
+        np.savetxt(f, result, fmt='%i', delimiter=",")
+

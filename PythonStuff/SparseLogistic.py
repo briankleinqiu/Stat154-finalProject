@@ -17,7 +17,7 @@ yhat_logit = logit.predict(X_holdout)
 accuracy = (sum(yhat_logit == y_holdout))/len(yhat_logit)
 
 print(accuracy)
-#.793225
+#.79616
 """
 for creating submission only
 t = logit.predict(X_test)
@@ -28,4 +28,10 @@ with open("logistic_submission.csv", "wb") as f:
             np.savetxt(f, result, fmt='%i', delimiter=",")
 """
 
+#create holdout predictions
+id = np.arange(25477) + 1
+result =  np.column_stack((id, yhat_logit.astype(int)))
+with open("holdout_logistic_submission.csv", "wb") as f:
+        f.write(b'Id,y\n')
+        np.savetxt(f, result, fmt='%i', delimiter=",")
 

@@ -10,13 +10,17 @@ Each of these files creates a model and a prediction on the test set used for su
 - SparseLogistic.py creates a sparse logistic model (logistic model with L1 penalty), accuracy is 79.609% 
 - XGboost.py creates 2 xgboost models using a linear method and tree, some parameters tuned using XGBoost\_CV.py, accuracy is 79.35% for linear and 69.89% for tree
 - NaiveBayes.py creates the Multinomial model, can't get Gaussian/Bernoulli to work on my laptop. 77.2108%
-
+- SVM.py creates a linear SVM model with L1 penalty, takes forever. 79.56% on holdout with L2 penalty and identical to logistic on Kaggle, .79585 with L1 penalty
+- kernelSVM.py creates a kernel SVM model, takes hours so run with caution. 
 
 TODO: 
 
-- Build SVM 
+- Build SVM, CV/tune parameters for linear if time, build kernel method
 - Build Random Forest? Might not be necessary since xgboost tree
 - Implement majority vote
 - Build adaboost
 - Remove correlated coefficients and run again, particularly on Naive Bayes
+- If time consider bagging for ensembling
+- 
+
 

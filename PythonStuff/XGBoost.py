@@ -53,3 +53,11 @@ with open("xgtree_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
         np.savetxt(f, result, fmt='%i', delimiter=",")
 
+
+#create holdout predictions
+id = np.arange(25477) + 1
+result =  np.column_stack((id, y_tree.astype(int)))
+with open("holdout_xgtree_submission.csv", "wb") as f:
+        f.write(b'Id,y\n')
+        np.savetxt(f, result, fmt='%i', delimiter=",")
+
