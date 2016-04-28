@@ -10,12 +10,13 @@ MODELS
 Each of these files creates a model, a prediction on the holdout set, and a prediction on the test set used for submission as a csv file:
 
 - SparseLogistic.py creates a sparse logistic model (logistic model with L1 penalty and C parameter tuned to .9), accuracy is 79.6248% 
-- XGboost.py creates 2 xgboost models using a linear method and tree, some parameters tuned using XGBoost\_CV.py, accuracy is 79.507% for linear and 69.89% for tree
+- XGboost.py creates 2 xgboost models using a linear method and tree, some parameters tuned using XGBoost\_CV.py, accuracy is 79.546% for linear and 69.89% for tree
 - NaiveBayes.py creates the Multinomial model, can't get Gaussian/Bernoulli to work on my laptop. 77.2108%
 - SVM.py creates a linear SVM model with L1 penalty, takes forever. 79.56% on holdout with L2 penalty and identical to logistic on Kaggle, .79585 with L1 penalty
 - kernelSVM.py creates a kernel SVM model with Gaussian rbf kernel, is O(n^2) so train on a smaller subset. 65.577% with rbf, 50.18644 with poly 
 - KNN.py: doesn't work due to errors with scipy sparse matrix 
 - RandomForest.py creates random forest with 'gini' and min\_leaf set to 100. Gives 74.632%
+- Perceptron.py creates perceptron separation, best with l1 penalty and gives 68.29
 
 
 MISC:
@@ -47,3 +48,4 @@ TODO:
 - If time consider bagging for ensembling especially for Naive Bayes?
 - Implement majority vote
 - Perceptron/LDA
+- Neural Network
