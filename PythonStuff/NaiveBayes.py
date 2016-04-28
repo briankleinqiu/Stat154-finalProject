@@ -25,6 +25,7 @@ gaussian = GaussianNB()
 gaussian.fit(X_train, y_train)
 y_gaussian = gaussian.predict(X_holdout)
 """
+
 multi = MultinomialNB()
 multi.fit(X_train,y_train)
 y_multi = multi.predict(X_holdout)

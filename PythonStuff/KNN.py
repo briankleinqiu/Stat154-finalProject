@@ -1,6 +1,6 @@
 from __future__ import division
 import numpy as np
-import sklearn.linear_model
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn import cross_validation
 
 #Takes a couple minutes to run the program
@@ -12,27 +12,31 @@ y_train = np.load("Data/y_train.npy")[()]
 y_holdout = np.load("Data/y_holdout.npy")[()]
 X_test = np.load("Data/X_test.npy")[()]
 
-logit = sklearn.linear_model.LogisticRegression(penalty = 'l1', C = 0.9)
-logit.fit(X_train, y_train)
-yhat_logit = logit.predict(X_holdout)
-accuracy = (sum(yhat_logit == y_holdout))/len(yhat_logit)
+knn = KNeighborsClassifier(
+        n_neighbors = 5,
+        leaf_size = 30,
+        #metric = "minkowsi", #distance method, minkowski or euclidean
+        #p = 2 #parameter for minkowski, 1 = l1 manhattan, 2 = l2 euclidean
+        )
 
+knn.fit(X_train, y_train)
+y_knn = knn.predict(X_holdout)
+accuracy = (sum(y_knn == y_holdout))/len(y_knn)
 print(accuracy)
-#.79616
 
 #for creating submission only
-t = logit.predict(X_test)
+t = knn.predict(X_test)
 id = np.arange(50000) + 1
 result =  np.column_stack((id, t.astype(int)))
-with open("logistic_submission.csv", "wb") as f:
+with open("knn_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
         np.savetxt(f, result, fmt='%i', delimiter=",")
 
 
 #create holdout predictions
 id = np.arange(25477) + 1
-result =  np.column_stack((id, yhat_logit.astype(int)))
-with open("holdout_logistic_submission.csv", "wb") as f:
+result =  np.column_stack((id, y_knn.astype(int)))
+with open("holdout_knn_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
         np.savetxt(f, result, fmt='%i', delimiter=",")
 """

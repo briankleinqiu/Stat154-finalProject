@@ -9,11 +9,14 @@ y_holdout = np.load("Data/y_holdout.npy")[()]
 X_test = np.load("Data/X_test.npy")[()]
 
 kernel = svm.SVC(kernel = "rbf")
-kernel.fit(X_train, y_train)
+kernel.fit(X_train[0:50000,:],y_train[0:50000])
 y_kernel = kernel.predict(X_holdout)
 kernel_accuracy = sum(y_kernel == y_holdout)/len(y_kernel)
 print("Kernel:")
 print(kernel_accuracy) 
+#.65577 with rbf
+#.501864 with poly
+
 
 #for creating submission only
 t = kernel.predict(X_test)

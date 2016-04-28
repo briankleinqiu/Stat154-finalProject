@@ -10,10 +10,11 @@ MODELS
 Each of these files creates a model, a prediction on the holdout set, and a prediction on the test set used for submission as a csv file:
 
 - SparseLogistic.py creates a sparse logistic model (logistic model with L1 penalty and C parameter tuned to .9), accuracy is 79.6248% 
-- XGboost.py creates 2 xgboost models using a linear method and tree, some parameters tuned using XGBoost\_CV.py, accuracy is 79.35% for linear and 69.89% for tree
+- XGboost.py creates 2 xgboost models using a linear method and tree, some parameters tuned using XGBoost\_CV.py, accuracy is 79.507% for linear and 69.89% for tree
 - NaiveBayes.py creates the Multinomial model, can't get Gaussian/Bernoulli to work on my laptop. 77.2108%
 - SVM.py creates a linear SVM model with L1 penalty, takes forever. 79.56% on holdout with L2 penalty and identical to logistic on Kaggle, .79585 with L1 penalty
-- kernelSVM.py creates a kernel SVM model, takes hours so run with caution.
+- kernelSVM.py creates a kernel SVM model with Gaussian rbf kernel, is O(n^2) so train on a smaller subset. 65.577% with rbf, 50.18644 with poly 
+- KNN.py: doesn't work due to errors with scipy sparse matrix 
 
 
 MISC:
@@ -26,12 +27,22 @@ MISC:
 
 TODO: 
 
-- Build SVM, CV/tune C for .1 to 1 and 1 to 10 for linear if time, build kernel method #1 is best parameter for C
-- tune C for logistic #.9 is best
-- Build Random Forest? Might not be necessary since xgboost tree
-- Build K nearest neighbours classifier
+- Build SVM, CV/tune C for .1 to 1 and 1 to 10 for linear if time
+    * 1 is best parameter for C
+- Build Kernel SVM
+    * On 50,000 observations using Gaussian kernel and poly kernel
+- tune C for logistic 
+    * .9 is best
+- Build Random Forest? Might not be necessary since xgboost tree 
+    * still running
+- Tune random forest thru CV for n\_estimators, min\_samples\_leaf, max\_features
+    * might not be feasible computationally
+- Build K nearest neighbours classifier and tune parameters
+    * can't build in python due to scipy sparse difficulties with dot product of itself here
 - Build adaboost
-- Remove correlated coefficients/build sparse datasets and run again, particularly on Naive Bayes #doesn't improve when using sparse datasets from logistic or svm
+- Remove correlated coefficients/build sparse datasets from sparse logistic and sparse linear svm run again, particularly on Naive Bayes 
+    * Naive Bayes: doesn't improve when using sparse datasets from logistic or svm
+    * KNN: 
 - If time consider bagging for ensembling especially for Naive Bayes?
 - Implement majority vote
 

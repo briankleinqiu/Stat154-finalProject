@@ -8,6 +8,9 @@ y_train = np.load("Data/y_train.npy")[()]
 y_holdout = np.load("Data/y_holdout.npy")[()]
 X_test = np.load("Data/X_test.npy")[()]
 
+
+
+######LINEAR#######
 d_train = xgb.DMatrix(X_train, y_train)
 d_holdout = xgb.DMatrix(X_holdout)
 d_test = xgb.DMatrix(X_test)
@@ -32,6 +35,17 @@ with open("xgboost_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
         np.savetxt(f, result, fmt='%i', delimiter=",")
 
+#create holdout predictions
+id = np.arange(25477) + 1
+result =  np.column_stack((id, yhat.astype(int)))
+with open("holdout_xgboost_submission.csv", "wb") as f:
+        f.write(b'Id,y\n')
+        np.savetxt(f, result, fmt='%i', delimiter=",")
+
+
+
+
+######TREE#######
 params_tree = {
         "booster":"gbtree",
         "objective":"binary:logistic"
