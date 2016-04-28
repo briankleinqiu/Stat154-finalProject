@@ -14,7 +14,7 @@ X_test = np.load("Data/X_test.npy")[()]
 d_train = xgb.DMatrix(X_train, y_train)
 d_holdout = xgb.DMatrix(X_holdout)
 d_test = xgb.DMatrix(X_test)
-params = {"booster":"gblinear", "objective":"binary:logistic"}
+params = {"booster":"gblinear", "objective":"binary:logistic", "eta":0.8}
 
 xg_model = xgb.train(params, d_train, num_boost_round = 5)
 yhat = xg_model.predict(d_holdout)
@@ -41,7 +41,6 @@ result =  np.column_stack((id, yhat.astype(int)))
 with open("holdout_xgboost_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
         np.savetxt(f, result, fmt='%i', delimiter=",")
-
 
 
 
@@ -74,4 +73,3 @@ result =  np.column_stack((id, y_tree.astype(int)))
 with open("holdout_xgtree_submission.csv", "wb") as f:
         f.write(b'Id,y\n')
         np.savetxt(f, result, fmt='%i', delimiter=",")
-

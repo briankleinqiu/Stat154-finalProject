@@ -15,6 +15,7 @@ Each of these files creates a model, a prediction on the holdout set, and a pred
 - SVM.py creates a linear SVM model with L1 penalty, takes forever. 79.56% on holdout with L2 penalty and identical to logistic on Kaggle, .79585 with L1 penalty
 - kernelSVM.py creates a kernel SVM model with Gaussian rbf kernel, is O(n^2) so train on a smaller subset. 65.577% with rbf, 50.18644 with poly 
 - KNN.py: doesn't work due to errors with scipy sparse matrix 
+- RandomForest.py creates random forest with 'gini' and min\_leaf set to 100. Gives 74.632%
 
 
 MISC:
@@ -34,7 +35,7 @@ TODO:
 - tune C for logistic 
     * .9 is best
 - Build Random Forest? Might not be necessary since xgboost tree 
-    * still running
+    * minleaf 50 or 100 makes almost no difference 
 - Tune random forest thru CV for n\_estimators, min\_samples\_leaf, max\_features
     * might not be feasible computationally
 - Build K nearest neighbours classifier and tune parameters
@@ -45,5 +46,4 @@ TODO:
     * KNN: 
 - If time consider bagging for ensembling especially for Naive Bayes?
 - Implement majority vote
-
-
+- Perceptron/LDA
