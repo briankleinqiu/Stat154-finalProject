@@ -66,7 +66,7 @@ holdout_combined[holdout_combined >= .5] = 1
 holdout_combined[holdout_combined < .5] = 0
 
 print("holdout accuracy of majority vote:")
-print(sum(holdout_combined == y_holdout)/len(holdout_combined)) #.7928, lower than sparse itself
+print(sum(holdout_combined == y_holdout)/len(holdout_combined)) #.79636
 """
 #CROSS VALIDATION
 models = np.asarray((
