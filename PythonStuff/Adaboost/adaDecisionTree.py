@@ -27,6 +27,8 @@ y_ada = ada.predict(X_holdout)
 y_ada[y_ada >= .5] = 1
 y_ada[y_ada < .5]= 0
 print(sum(y_ada == y_holdout)/len(y_ada))
+#66.0988
+
 
 #for creating submission only
 t = ada.predict(X_test)

@@ -16,7 +16,10 @@ logit = sklearn.linear_model.LogisticRegression(penalty = 'l1', C = 0.9)
 logit.fit(X_train, y_train)
 yhat_logit = logit.predict(X_holdout)
 accuracy = (sum(yhat_logit == y_holdout))/len(yhat_logit)
-
+yhat_prob = logit.predict_proba(X_holdout)
+"""
+np.savetxt("log_prob.txt", yhat_prob, delimiter = ",")
+"""
 print(accuracy)
 #.79616
 
