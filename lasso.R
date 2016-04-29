@@ -55,13 +55,26 @@ sparse_indices = which(coef(sparse_log, s = "lambda.1se") != 0)
 sparse_indices = as.character(sparse_indices)
 write(sparse_indices, "sparse_indices.txt", sep="\n")
 
+#logistic on all variables 
+temp = as.data.frame(cbind(X_train, y_train))
+temp[,1001] = as.factor(temp[,1001])
+colnames(temp)[1001] = "response"
+logit = glm(response ~  ., data = temp , family = "binomial")
+yhat_logit = predict(logit, newdata = as.data.frame(X_holdout), type = "response")
+yhat_logit
+yhat_logit[yhat_logit >= .5] = 1
+yhat_logit[yhat_logit < .5] = 0
+sum(yhat_logit == as.factor(y_holdout))/length(yhat_logit) #77%
 
+#try naive bayes
 library(e1071)
 bayes = naiveBayes(x = X_train, y = as.factor(y_train))
 yhat_bayes =  predict(bayes, newdata = X_holdout) 
-sum(yhat_bayes == as.factor(y_holdout))/length(temp2) #68.4% on Naive Bayes
+sum(yhat_bayes == as.factor(y_holdout))/length(yhat_bayes) #68.4% on Naive Bayes
 
 save(sparse_log, file = "sparse_logistic.rda")
+
+
 
 
 

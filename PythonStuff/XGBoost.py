@@ -23,7 +23,7 @@ yhat[yhat < .5] = 0
 accuracy = (sum(yhat == y_holdout))/len(yhat)
 print("GBLINEAR ACCURACY:")
 print(accuracy)
-#.7935 accuracy with nround = 5
+#.79546 accuracy with nround = 5
 
 #for creating submission only
 t = xg_model.predict(d_test)
